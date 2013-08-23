@@ -1,4 +1,13 @@
 dot-vim
 =======
 
-  usage: ./setup.sh
+#####usage:
+
+    $ git clone THIS
+    $ cd dot-vim
+    $ ./setup.sh
+
+#####then
+
+    $ cd .vim/bundle/vimproc
+    $ make
