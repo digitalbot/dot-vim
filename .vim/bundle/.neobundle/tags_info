@@ -1,0 +1,6 @@
+lightline.vim
+neobundle.vim
+neocomplcache
+unite.vim
+vim-quickrun
+vimproc
