@@ -1,6 +1,7 @@
 lightline.vim
 neobundle.vim
-neocomplcache
+neocomplcache.vim
+neocomplete.vim
 unite.vim
 vim-quickrun
 vimproc

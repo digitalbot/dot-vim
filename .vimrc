@@ -56,7 +56,7 @@ set shiftwidth=4
 set vb t_vb=
 
 augroup vimrc
-        autocmd! FileType perl setlocal shiftwidth=4 tabstop=4 softtabstop=4
+    autocmd! FileType perl setlocal shiftwidth=4 tabstop=4 softtabstop=4
 augroup END
 
 
@@ -94,21 +94,21 @@ set listchars=tab:>.,trail:_,extends:>,precedes:<
 "印字不可能文字を16進数で表示
 set display=uhex
 
-" カーソル行をハイライト
+"カーソル行をハイライト
 set cursorline
 
 "入力モード時、ステータスラインのカラーを変更
 augroup InsertHook
-autocmd!
-autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
-autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
+    autocmd!
+    autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
+    autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
 augroup END
 
-" カレントウィンドウにのみ罫線を引く
+"カレントウィンドウにのみ罫線を引く
 augroup cch
-  autocmd! cch
-  autocmd WinLeave * set nocursorline
-  autocmd WinEnter,BufRead * set cursorline
+    autocmd! cch
+    autocmd WinLeave * set nocursorline
+    autocmd WinEnter,BufRead * set cursorline
 augroup END
 
 set incsearch
@@ -138,9 +138,20 @@ NeoBundle 'Shougo/vimproc', {
     \    },
     \ }
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'itchyny/lightline.vim'
+
+function! s:meet_neocomplete_requirements()
+    return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
+endfunction
+
+if s:meet_neocomplete_requirements()
+    NeoBundle 'Shougo/neocomplete.vim'
+    NeoBundleFetch 'Shougo/neocomplcache.vim'
+else
+    NeoBundleFetch 'Shougo/neocomplete.vim'
+    NeoBundle 'Shougo/neocomplcache.vim'
+endif
 
 filetype plugin indent on
 filetype indent on
@@ -161,28 +172,59 @@ nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite file_mru buffer<CR>
 
 "==============================
-"" Neocomplcache
+"" Completion
 "==============================
 
-set completeopt=menuone
+if s:meet_neocomplete_requirements()
+    "NEOCOMPLETE
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_auto_select = 1
+    let g:neocomplete#enable_fuzzy_completion = 1
 
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_camel_case_completion = 1
+    let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : ''
+        \ }
 
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : ''
-    \ }
+    inoremap <expr><C-g> neocomplete#undo_completion()
+    inoremap <expr><C-l> neocomplete#complete_common_string()
+    inoremap <expr><CR> neocomplete#smart_close_popup() . "\<CR>"
+    inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
+    inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+    inoremap <expr><C-h> neocomplete#smart_close_popup() . "\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup() . "\<C-h>"
+    inoremap <expr><C-y> neocomplete#close_popup()
+    inoremap <expr><C-e> neocomplete#cancel_popup()
 
-inoremap <expr><C-g> neocomplcache#undo_completion()
-inoremap <expr><C-l> neocomplcache#complete_common_string()
-inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
-inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
-inoremap <expr><C-h> neocomplcache#smart_close_popup() . "\<C-h>"
-inoremap <expr><C-y> neocomplcache#close_popup()
-inoremap <expr><C-e> neocomplcache#cancel_popup()
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+    set completeopt=menuone
+else
+    "NEOCOMPLCACHE
+    let g:neocomplcache_enable_at_startup = 1
+    let g:neocomplcache_enable_smart_case = 1
+    let g:neocomplcache_enable_underbar_completion = 1
+    let g:neocomplcache_enable_camel_case_completion = 1
+
+    let g:neocomplcache_dictionary_filetype_lists = {
+        \ 'default' : ''
+        \ }
+
+    inoremap <expr><C-g> neocomplcache#undo_completion()
+    inoremap <expr><C-l> neocomplcache#complete_common_string()
+    inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
+    inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
+    inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+    inoremap <expr><C-h> neocomplcache#smart_close_popup() . "\<C-h>"
+    inoremap <expr><C-y> neocomplcache#close_popup()
+    inoremap <expr><C-e> neocomplcache#cancel_popup()
+    set completeopt=menuone
+endif
+
 
 
 "==============================
@@ -191,6 +233,4 @@ inoremap <expr><C-e> neocomplcache#cancel_popup()
 
 let g:lightline = {
     \ 'colorscheme': "jellybeans",
-    \ } 
-
-
+    \ }
