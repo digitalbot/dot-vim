@@ -2,10 +2,8 @@ dot-vim
 =======
 
 #####usage:
-    $ git clone git://github.com/digitalbot/dot-vim.git
+    $ git clone --recursive git://github.com/digitalbot/dot-vim.git
     $ cd dot-vim
-    $ git submodule init
-    $ git submodule update
     $ ./setup.sh
     $ vim
 
