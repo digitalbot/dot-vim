@@ -2,12 +2,11 @@ dot-vim
 =======
 
 #####usage:
-
-    $ git clone THIS
+    $ git clone git://github.com/digitalbot/dot-vim.git
     $ cd dot-vim
-    $ ./setup.sh
     $ git submodule init
     $ git submodule update
+    $ ./setup.sh
     $ vim
 
 #####then(in vim)
@@ -15,7 +14,5 @@ dot-vim
     :NeoBundleInstall
     :q
 
-#####last
-
-    $ cd .vim/bundle/vimproc
-    $ make
+#####Complete!
+enjoy vim!
