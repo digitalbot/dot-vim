@@ -119,6 +119,7 @@ nmap <ESC><ESC> ;nohlsearch<CR><ESC>
 
 colorscheme slate
 
+
 "==============================
 "" Plugin
 "==============================
@@ -139,7 +140,12 @@ NeoBundle 'Shougo/vimproc', {
     \ }
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'itchyny/lightline.vim'
+
+if !has('gui_running')
+    NeoBundle 'itchyny/lightline.vim'
+else
+    NeoBundleFetch 'itchyny/lightline.vim'
+endif
 
 function! s:meet_neocomplete_requirements()
     return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
@@ -157,10 +163,8 @@ filetype plugin indent on
 filetype indent on
 syntax on
 
-
-"==============================
-"" Unite
-"==============================
+" Unite
+"-------------------
 
 let g:vinarise_enable_auto_detect = 1
 let g:unite_enable_start_insert = 1
@@ -171,9 +175,9 @@ nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite file_mru buffer<CR>
 
-"==============================
-"" Completion
-"==============================
+
+" Completion
+"-------------------
 
 if s:meet_neocomplete_requirements()
     "NEOCOMPLETE
@@ -226,11 +230,11 @@ else
 endif
 
 
+" Lightline
+"-------------------
 
-"==============================
-"" Lightline
-"==============================
-
-let g:lightline = {
-    \ 'colorscheme': "jellybeans",
-    \ }
+if !has('gui_running')
+    let g:lightline = {
+        \ 'colorscheme': "jellybeans",
+        \ }
+endif
