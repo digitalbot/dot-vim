@@ -140,6 +140,7 @@ NeoBundle 'Shougo/vimproc', {
     \ }
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'gcmt/wildfire.vim'
 
 if !has('gui_running')
     NeoBundle 'itchyny/lightline.vim'
@@ -238,3 +239,10 @@ if !has('gui_running')
         \ 'colorscheme': "jellybeans",
         \ }
 endif
+
+" Wildfire
+"-------------------
+
+let g:wildfire_fuel_map = "<ENTER>"
+let g:wildfire_water_map = "<S-ENTER>"
+let g:wildfire_objects = ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it', 'i>']
