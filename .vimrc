@@ -115,7 +115,7 @@ set incsearch
 set hlsearch
 
 "Esc二回押しでハイライト除去
-nmap <ESC><ESC> ;nohlsearch<CR><ESC>
+nmap <ESC><ESC> :nohlsearch<CR><ESC>
 
 colorscheme slate
 
