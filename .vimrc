@@ -141,6 +141,7 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'gcmt/wildfire.vim'
+NeoBundle 'kana/vim-smartinput'
 
 if !has('gui_running')
     NeoBundle 'itchyny/lightline.vim'
