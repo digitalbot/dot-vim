@@ -1,0 +1,32 @@
+set nocp
+set noswapfile
+set nobackup
+set cindent
+set autoindent
+set smartindent
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set smarttab
+set expandtab
+set smartcase
+set ignorecase
+set showcmd
+set showmode
+set showmatch
+set cursorline
+set number
+set incsearch
+set hlsearch
+set list
+set listchars=tab:>.
+
+nmap <ESC><ESC> :nohlsearch<CR><ESC>
+
+inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+
+colorscheme slate
