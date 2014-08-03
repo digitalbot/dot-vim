@@ -222,7 +222,7 @@ else
 
     inoremap <expr><C-g> neocomplcache#undo_completion()
     inoremap <expr><C-l> neocomplcache#complete_common_string()
-    inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
+    "inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
     inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
     inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
     inoremap <expr><C-h> neocomplcache#smart_close_popup() . "\<C-h>"
