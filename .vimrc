@@ -21,6 +21,7 @@ set autoread
 set noswapfile
 set backupskip=/tmp/*,/private/tmp/*
 set nobackup
+set noundofile
 
 "編集中でも他のファイルを開けるようにする
 set hidden
@@ -194,7 +195,7 @@ if s:meet_neocomplete_requirements()
 
     inoremap <expr><C-g> neocomplete#undo_completion()
     inoremap <expr><C-l> neocomplete#complete_common_string()
-    inoremap <expr><CR> neocomplete#smart_close_popup() . "\<CR>"
+    "inoremap <expr><CR> neocomplete#smart_close_popup() . "\<CR>"
     inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
     inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
     inoremap <expr><C-h> neocomplete#smart_close_popup() . "\<C-h>"
